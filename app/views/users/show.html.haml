@@ -1,0 +1,5 @@
+= link_to 'Sign In', new_user_session_path
+= link_to 'Sign Up', new_user_registration_path
+- if user_signed_in?
+  = link_to 'Sign Out', destroy_user_session_path
+  %h1= "Users Show Page"
