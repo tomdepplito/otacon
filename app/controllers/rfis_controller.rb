@@ -1,0 +1,2 @@
+class RfisController < ApplicationController
+end
