@@ -1,0 +1,5 @@
+<%= form_for @employee, :remote => true do |f| %>
+  <%= f.text_field :email %>
+  <%= f.text_area :email, :size => "60x12" %>
+  <%= f.submit "Create" %>
+<% end %>
