@@ -7,7 +7,6 @@ gem 'devise'
 
 group :production do
   gem 'pg'
-  gem 'activerecord-postgresql-adapter'
 end
 
 group :assets do
