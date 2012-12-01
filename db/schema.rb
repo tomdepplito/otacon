@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117010729) do
+ActiveRecord::Schema.define(:version => 20121201052538) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "admin_id"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.integer  "message_id",  :null => false
+    t.integer  "sender_id",   :null => false
+    t.integer  "receiver_id", :null => false
+    t.text     "body",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "employees", :force => true do |t|
@@ -28,9 +37,8 @@ ActiveRecord::Schema.define(:version => 20121117010729) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "rfi_id"
-    t.integer  "author_id"
-    t.text     "body"
+    t.integer  "sender_id",  :null => false
+    t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -44,13 +52,6 @@ ActiveRecord::Schema.define(:version => 20121117010729) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "company_id", :null => false
-  end
-
-  create_table "rfis", :force => true do |t|
-    t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "author_id"
   end
 
   create_table "users", :force => true do |t|

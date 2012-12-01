@@ -1,0 +1,9 @@
+%h1= "Create RFI"
+
+= form_for @rfi do |f|
+  %p
+    = f.label "Body"
+    %br
+    = f.text_field :body
+  %p.button
+    = f.submit
