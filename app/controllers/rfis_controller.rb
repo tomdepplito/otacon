@@ -1,3 +1,5 @@
+require 'rfi_recipient_coordinator'
+
 class RfisController < ApplicationController
   def new
     @rfi = Rfi.new
@@ -5,8 +7,7 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    @rfi.sender_id = current_user.id
-    if @rfi.save
+    if RfiRecipientCoordinator.new(current_user.id, params[:body])
       flash[:success] = "RFI created"
       redirect_to rfis_path
       #redirect_to user_path(current_user)
@@ -18,5 +19,9 @@ class RfisController < ApplicationController
 
   def index
     @rfis = Rfi.all.select { |rfi| rfi.sender_id == current_user.id }
+  end
+
+  def show
+    @rfi = Rfi.find(params[:id])
   end
 end

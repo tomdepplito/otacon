@@ -5,6 +5,6 @@ Otacon::Application.routes.draw do
   resources :companies
   resources :offices
   resources :employees, :only => ['new', 'create']
-  resources :rfis, :only => ['new', 'create', 'index']
+  resources :rfis, :only => ['new', 'create', 'index', 'show']
   root :to => "users#index"
 end
