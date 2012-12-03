@@ -1,5 +1,5 @@
 class RfiRecipientCoordinator
-  attr_accessor :sender_id, :body
+  attr_accessor :sender_id, :body, :recipient_ids
 
   def initialize(sender_id, body)
     @recipient_ids = Set.new
@@ -10,9 +10,11 @@ class RfiRecipientCoordinator
   private
 
   def create_rfis
-    @recipient_ids.each do |recipient_id|
-      rfi = Rfi.new(:body => @body, :receiver_id => recipient_id, :sender_id => @sender_id)
-      rfi.save
+    unless @recipient_ids.lenth <= 0
+      @recipient_ids.each do |recipient_id|
+        rfi = Rfi.new(:body => @body, :receiver_id => recipient_id, :sender_id => @sender_id)
+        rfi.save
+      end
     end
   end
 end
