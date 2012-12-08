@@ -1,6 +1,8 @@
 require 'rfi_recipient_coordinator'
 
 class RfisController < ApplicationController
+  before_filter :authenticate_user!
+
   def new
     @rfi = Rfi.new
   end
