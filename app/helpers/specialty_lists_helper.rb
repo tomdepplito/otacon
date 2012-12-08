@@ -1,0 +1,2 @@
+module SpecialtyListsHelper
+end
