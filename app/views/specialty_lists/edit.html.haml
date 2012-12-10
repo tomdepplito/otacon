@@ -1,3 +1,17 @@
 %h1= "Edit Specialty List"
 
-= @specialty_list.enclosures
+= form_for @specialty_list do |f|
+  %p
+    = f.label "Enclosures"
+    = f.radio_button :enclosures, true
+    = f.label "Yes"
+    = f.radio_button :enclosures, false
+    = f.label "No"
+  %p
+    = f.label "Accumulators"
+    = f.radio_button :accumulators, true
+    = f.label "Yes"
+    = f.radio_button :accumulators, false
+    = f.label "No"
+  %p.button
+    = f.submit

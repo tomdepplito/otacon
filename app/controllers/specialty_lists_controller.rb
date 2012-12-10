@@ -5,7 +5,8 @@ class SpecialtyListsController < ApplicationController
 
   def update
     @specialty_list = SpecialtyList.find_by_user_id(params[:id])
-    if @specialty_list.update_attributes
+    @specialty_list.update_attributes(params[:specialty_list])
+    if @specialty_list.save
       flash[:success] = "List Updated!"
       redirect_to users_path
     else

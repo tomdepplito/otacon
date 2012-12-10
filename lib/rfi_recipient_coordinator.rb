@@ -17,4 +17,16 @@ class RfiRecipientCoordinator
       end
     end
   end
+
+  def get_specialty_lists
+
+  end
+
+  def get_users
+
+  end
+
+  def match?
+
+  end
 end

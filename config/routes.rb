@@ -6,6 +6,6 @@ Otacon::Application.routes.draw do
   resources :offices
   resources :employees, :only => ['new', 'create']
   resources :rfis, :only => ['new', 'create', 'index', 'show']
-  resources :specialty_lists, :only => ['edit']
+  resources :specialty_lists, :only => ['edit', 'update']
   root :to => "users#index"
 end
