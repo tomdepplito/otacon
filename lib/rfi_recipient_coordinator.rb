@@ -1,6 +1,6 @@
 require 'dictionary'
 class RfiRecipientCoordinator
-  attr_reader :sender_id, :recipient_ids, :latitude, :longitude, :distance, :key_words, :body
+  attr_reader :sender_id, :recipient_ids, :latitude, :longitude, :distance, :key_words, :body, :messages
 
   def initialize(sender_id, body, latitude, longitude, distance = nil)
     @recipient_ids = Set.new
@@ -9,6 +9,7 @@ class RfiRecipientCoordinator
     @latitude = latitude
     @longitude = longitude
     @distance = distance
+    @messages = []
     create_keywords(body)
     create_rfis
   end
@@ -20,6 +21,7 @@ class RfiRecipientCoordinator
     unless @recipient_ids.length <= 0
       @recipient_ids.each do |recipient_id|
         rfi = Rfi.new(:body => @body, :receiver_id => recipient_id, :sender_id => @sender_id)
+        messages << rfi
         rfi.save
       end
     end
@@ -32,18 +34,22 @@ class RfiRecipientCoordinator
 
   def get_specialty_lists(users)
     users.each do |user|
-      list = SpecialtyList.find_by_user_id(user.id)
-      @recipient_ids << list.user_id if list && match?(list.specialties)
+      unless user.id == @sender_id
+        list = SpecialtyList.find_by_user_id(user.id)
+        @recipient_ids << list.user_id if list && match?(list.specialties)
+      end
     end
   end
 
   def match?(specialties)
-    num_matches = (@keywords && specialties).length
-    (num_matches / @keywords.length.to_f) > 0.5
+    matches = []
+    specialties.each do |specialty|
+      matches << specialty if @keywords.detect { |keyword| specialty === keyword }
+    end
+    (matches.length / @keywords.length.to_f) >= 0.5
   end
 
   def create_keywords(body)
-    #keywords = body.split(' ').delete_if { |word| Dictionary::OMIT_WORDS.include?(word) }
     @keywords = body.split(' ').select do |key_word|
       Dictionary::KEY_WORDS.detect { |dict_word| key_word =~ dict_word }
     end

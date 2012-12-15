@@ -1,5 +1,5 @@
 class SpecialtyList < ActiveRecord::Base
-  attr_accessible :user_id, :enclosures, :accumulators
+  attr_accessible :user_id, :enclosures, :accumulators, :fittings, :pumps
   belongs_to :user, :dependent => :destroy
 
   def specialties
