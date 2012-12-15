@@ -11,40 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208212942) do
+ActiveRecord::Schema.define(:version => 20121212053030) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "admin_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "conversations", :force => true do |t|
-    t.integer  "sender_id",   :null => false
-    t.integer  "receiver_id", :null => false
-    t.text     "body",        :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "sender_id",      :null => false
+    t.integer  "receiver_id",    :null => false
+    t.text     "body",           :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "parent_id"
+    t.string   "street_address"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "employees", :force => true do |t|
-    t.integer  "company_id", :null => false
     t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "office_id"
   end
 
   create_table "offices", :force => true do |t|
-    t.string   "street"
-    t.string   "house_num"
-    t.string   "zip"
-    t.string   "state"
     t.string   "phone_num"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "company_id", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "company_id",     :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "street_address"
   end
 
   create_table "specialty_lists", :force => true do |t|
@@ -72,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20121208212942) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.boolean  "vendor",                 :default => false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

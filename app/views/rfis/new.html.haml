@@ -3,7 +3,9 @@
 = form_for @rfi do |f|
   %p
     = f.label "Body"
-    %br
     = f.text_field :body
+    %br
+    = f.label "Street Address"
+    = f.text_field :street_address
   %p.button
     = f.submit

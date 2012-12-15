@@ -1,4 +1,5 @@
 require 'rfi_recipient_coordinator'
+require 'address'
 
 class RfisController < ApplicationController
   before_filter :authenticate_user!
@@ -9,7 +10,7 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    if RfiRecipientCoordinator.new(current_user.id, params[:body])
+    if RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude)
       flash[:success] = "RFI created"
       redirect_to rfis_path
       #redirect_to user_path(current_user)
