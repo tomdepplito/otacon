@@ -5,11 +5,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :vendor
-  # has_many :rfis
+  has_many :rfis
   # has_many :messages
-  # attr_accessible :title, :body
   has_one :specialty_list
 
   # geocoded_by :full_street_address
@@ -26,10 +24,5 @@ class User < ActiveRecord::Base
 
   def add_specialty_list
     SpecialtyList.create(:user_id => self.id)
-  end
-
-  def full_street_address
-    office = Office.find(Employee.find_by_user_id(self.id).office_id)
-    "#{office.house_num} #{office.street} #{office.zip}, #{office.state}"
   end
 end

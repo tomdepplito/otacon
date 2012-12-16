@@ -10,10 +10,10 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    if RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude)
-      flash[:success] = "RFI created"
+    rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude)
+    if rfi_coord.messages.length > 0
+      flash[:success] = "You've just sent #{rfi_coord.messages} messages"
       redirect_to rfis_path
-      #redirect_to user_path(current_user)
     else
       flash[:error] = "Something went wrong"
       render :new
