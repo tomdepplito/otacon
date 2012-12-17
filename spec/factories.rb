@@ -7,6 +7,8 @@ FactoryGirl.define do
   factory :user do
     email { FactoryGirl.generate(:email) }
     password { FactoryGirl.generate(:string) }
+    vendor false
+    street_address "11768"
   end
 
   factory :company do

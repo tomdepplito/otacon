@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212053030) do
+ActiveRecord::Schema.define(:version => 20121216232815) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -23,15 +23,16 @@ ActiveRecord::Schema.define(:version => 20121212053030) do
   end
 
   create_table "conversations", :force => true do |t|
-    t.integer  "sender_id",      :null => false
-    t.integer  "receiver_id",    :null => false
-    t.text     "body",           :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "sender_id",        :null => false
+    t.integer  "receiver_id",      :null => false
+    t.text     "body",             :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "parent_id"
     t.string   "street_address"
     t.float    "latitude"
     t.float    "longitude"
+    t.float    "match_percentage"
   end
 
   create_table "employees", :force => true do |t|
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121212053030) do
     t.boolean  "vendor",                 :default => false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "street_address"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

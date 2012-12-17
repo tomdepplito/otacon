@@ -1,5 +1,5 @@
 class Rfi < Conversation
-  attr_accessible :body, :parent_id, :sender_id, :receiver_id, :street_address, :latitude, :longitude
+  attr_accessible :body, :parent_id, :sender_id, :receiver_id, :street_address, :latitude, :longitude, :match_percentage
 
   geocoded_by :street_address
 

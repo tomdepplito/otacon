@@ -5,20 +5,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :vendor
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :vendor, :street_address
   has_many :rfis
   # has_many :messages
   has_one :specialty_list
 
-  # geocoded_by :full_street_address
-
-  # after_validation :geocode
-
   after_create :add_specialty_list
 
-  def self.get_vendors
-    User.all.select { |user| user.vendor == true }
-  end
+  geocoded_by :street_address
+
+  after_validation :geocode, :if => :street_address_changed?
+
+  scope :vendors, lambda { where('users.vendor = true') }
 
   private
 

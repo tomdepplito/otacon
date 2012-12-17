@@ -10,12 +10,12 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude)
+    rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude, params[:miles])
     if rfi_coord.messages.length > 0
-      flash[:success] = "You've just sent #{rfi_coord.messages} messages"
+      flash[:success] = "You've just sent #{rfi_coord.messages.length} messages"
       redirect_to rfis_path
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = "Sorry, we could not find any vendors for you.  Try modifying your search."
       render :new
     end
   end
