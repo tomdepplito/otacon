@@ -1,0 +1,10 @@
+%h1= "#{@company.name} Employee Roster"
+
+= form_for @employee do |f|
+  %p
+    = label '', "Employee Email:"
+    = text_field_tag :email
+    = hidden_field_tag :company_id, @company.id
+    %br
+  %p.button
+    = f.submit
