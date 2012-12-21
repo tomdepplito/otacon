@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :check_admin_status, :except => ['new', 'create']
 
   def new
     @company = Company.new
@@ -19,15 +20,13 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
+    @employees = Employee.where('company_id = @company.id')
   end
 
   def edit
-    @company = Company.find(params[:id])
   end
 
   def update
-    @company = Company.find(params[:id])
     if @company.update_attributes(params[:company])
       flash[:success] = "Company Updated!"
       redirect_to company_path(@company)
@@ -35,5 +34,12 @@ class CompaniesController < ApplicationController
       flash[:error] = "Something went wrong"
       render :edit
     end
+  end
+
+  private
+
+  def check_admin_status
+    @company = Company.find(params[:id])
+    redirect_to users_path unless current_user.id == @company.admin_id
   end
 end
