@@ -11,6 +11,12 @@ FactoryGirl.define do
     street_address "11768"
   end
 
+  factory :employee do
+    user_id { FactoryGirl.generate(:id) }
+    office_id { FactoryGirl.generate(:id) }
+    company_id { FactoryGirl.generate(:id) }
+  end
+
   factory :company do
     name { FactoryGirl.generate(:name) }
     admin_id { FactoryGirl.generate(:id) }
@@ -29,11 +35,6 @@ FactoryGirl.define do
     state { FactoryGirl.generate(:string) }
     zip 11768
     phone_num { FactoryGirl.generate(:string) }
-    company_id { FactoryGirl.generate(:id) }
-  end
-
-  factory :employee do
-    user_id { FactoryGirl.generate(:id) }
     company_id { FactoryGirl.generate(:id) }
   end
 
