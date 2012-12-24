@@ -1,5 +1,4 @@
 %h1= "Edit #{@company.name}"
-= link_to 'Add Employee to Company', new_company_employee_path(@company.id)
 
 = form_for @company do |f|
   %p
@@ -7,4 +6,12 @@
     = f.text_field :name
   %p.button
     = f.submit
+
+- @employees.each do |employee|
+  %p
+    = "#{employee.user.email} - #{employee.title}"
+    = link_to 'Remove Employee', employee_path(employee.id), :method => 'delete'
+    = link_to 'Edit Employee Info', edit_employee_path(employee.id)
+
+= link_to 'Add Employee to Company', new_company_employee_path(@company.id)
 

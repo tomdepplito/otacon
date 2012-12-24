@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @employees = @company.employees
   end
 
   def update
