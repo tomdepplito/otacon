@@ -9,3 +9,5 @@
       = f.radio_button :office_id, office.id
   %p.button
     = f.submit
+
+= link_to 'Remove', employee_path(@employee.id), :method => 'delete'

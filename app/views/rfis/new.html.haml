@@ -11,5 +11,6 @@
     = label :miles, "Within"
     = text_field_tag :miles
     = label :miles , "Miles of me"
+    = hidden_field_tag :parent_id, @rfi.parent_id
   %p.button
     = f.submit

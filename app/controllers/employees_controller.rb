@@ -1,18 +1,18 @@
 class EmployeesController < ApplicationController
+  before_filter :get_company_info, :only => ['new', 'create']
+
   def new
     @employee = Employee.new
-    @company = Company.find(params[:company_id])
   end
 
   def create
-    @company = Company.find(params[:company_id])
-    @employee = Employee.new
+    @employee = Employee.new(params[:employee])
     @employee.user_id = User.find_by_email(params[:email]).id
     @employee.company_id = @company.id
 
     if @employee.save
       flash[:success] = "You've Added an employee"
-      redirect_to company_edit_path(@company.id)
+      redirect_to edit_company_path(@company.id)
     else
       flash[:error] = "Something went wrong"
       render :new
@@ -40,6 +40,13 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     @company = Company.find(@employee.company_id)
     @employee.delete unless @company.admin_id == @employee.id
-    redirect_to :back
+    redirect_to edit_company_path(@company.id)
+  end
+
+  private
+
+  def get_company_info
+    @company = Company.find(params[:company_id])
+    @offices = Office.where('company_id = ?', @company.id)
   end
 end

@@ -5,7 +5,7 @@ class RfisController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    @rfi = Rfi.new
+    @rfi = Rfi.new(:parent_id => params[:parent_id])
   end
 
   def create

@@ -10,7 +10,7 @@
   <%= render :partial => "shared/header" %>
   <% if signed_in? %>
     <%= link_to 'Create Company', new_company_path %>
-    <%= link_to "Create RFI", new_rfi_path %>
+    <%= link_to "RFIs", rfis_path %>
     <%= link_to "Edit Specialty List", edit_specialty_list_path(current_user.id) %>
     <% if company = Company.find_by_admin_id(current_user.id) %>
       <%= link_to "Company Admin Page", edit_company_path(company.id) %>
