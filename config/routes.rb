@@ -1,7 +1,7 @@
 Otacon::Application.routes.draw do
   devise_for :users
   #match "/users/sign_out" => "users#index"
-  resources :users, :only => ['show', 'index']
+  resources :users
   resources :companies
   resources :company do
     resources :employees

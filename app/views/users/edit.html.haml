@@ -1,0 +1,17 @@
+%h1= 'User Edit Page'
+
+= form_for @user do |f|
+  %p
+    = f.label "Email:"
+    = f.text_field :email
+  %p
+    = f.label "Are you a vendor?"
+    = f.radio_button :vendor, true
+    = f.label "Yes"
+    = f.radio_button :vendor, false
+    = f.label "No"
+  %p
+    = f.label "Street Address:"
+    = f.text_field :street_address
+  %p.button
+    = f.submit
