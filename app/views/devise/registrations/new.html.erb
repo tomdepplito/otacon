@@ -12,15 +12,6 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :street_address %><br />
-  <%= f.text_field :street_address %></div>
-
-  <div><%= f.label "Are you a vendor?" %><br />
-  <%= f.radio_button :vendor, true%>
-  <%= f.label "Yes" %>
-  <%= f.radio_button :vendor, false%>
-  <%= f.label "No" %></div>
-
   <div id="subscription"><%= render "shared/subscription" %></div>
 
   <div><%= f.submit "Sign up" %></div>

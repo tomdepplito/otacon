@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :vendor, :street_address
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :street_address
   has_many :rfis
   has_one :specialty_list
 
@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
   geocoded_by :street_address
 
   after_validation :geocode, :if => :street_address_changed?
-
-  scope :vendors, lambda { where('users.vendor = true') }
 
   private
 
