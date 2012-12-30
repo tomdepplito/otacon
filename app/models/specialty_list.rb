@@ -1,6 +1,7 @@
 class SpecialtyList < ActiveRecord::Base
-  attr_accessible :user_id, :enclosures, :accumulators, :fittings, :pumps
-  belongs_to :user, :dependent => :destroy
+  attr_accessible :owner_id, :enclosures, :accumulators, :fittings, :pumps
+  belongs_to :employee, :dependent => :destroy
+  belongs_to :company, :dependent => :destroy
 
   def specialties
     specialties = self.attributes.select { |key, val| val == true }.keys

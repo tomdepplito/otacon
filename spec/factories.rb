@@ -15,6 +15,7 @@ FactoryGirl.define do
     user_id { FactoryGirl.generate(:id) }
     office_id { FactoryGirl.generate(:id) }
     company_id { FactoryGirl.generate(:id) }
+    street_address "11768"
   end
 
   factory :company do
@@ -39,7 +40,7 @@ FactoryGirl.define do
   end
 
   factory :specialty_list do
-    user
+    employee
     accumulators false
     actuators false
     fittings false
