@@ -17,7 +17,7 @@ class RfiRecipientCoordinator
   private
 
   def create_rfis
-    get_users
+    get_employees
     unless @recipient_ids.length <= 0
       @recipient_ids.each do |recipient_id|
         match_percentage = (@matches.length / @keywords.length.to_f) * 100
@@ -28,16 +28,16 @@ class RfiRecipientCoordinator
     end
   end
 
-  def get_users
-    users = @distance.blank? ? User.vendors : User.vendors.near([@latitude, @longitude], @distance)
-    get_specialty_lists(users)
+  def get_employees
+    employees = @distance.blank? ? Employee.vendors : Employee.vendors.near([@latitude, @longitude], @distance)
+    get_specialty_lists(employees)
   end
 
-  def get_specialty_lists(users)
-    users.each do |user|
-      unless user.id == @sender_id
-        list = SpecialtyList.find_by_user_id(user.id)
-        @recipient_ids << list.user_id if list && match?(list.specialties)
+  def get_specialty_lists(employees)
+    employees.each do |employee|
+      unless employee.id == @sender_id
+        list = SpecialtyList.find_by_owner_id(employee.id)
+        @recipient_ids << list.owner_id if list && match?(list.specialties)
       end
     end
   end

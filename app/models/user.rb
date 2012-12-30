@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :vendor, :street_address
   has_many :rfis
-  # has_many :messages
   has_one :specialty_list
 
   after_create :add_specialty_list
