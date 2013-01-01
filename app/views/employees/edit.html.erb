@@ -1,0 +1,14 @@
+<%= form_for @employee do |f| %>
+  <p>
+    <%= f.label "Title:" %>
+    <%= f.text_field :title %>
+  </p>
+  <%= f.label "Office:" %>
+    <% @offices.each do |office| %>
+      <%= f.label "#{office.street_address}" %>
+      <%= f.radio_button :office_id, office.id %>
+    <% end %>
+  <p><%= f.submit %></p>
+<% end %>
+
+<%= link_to 'Remove', employee_path(@employee.id), :method => 'delete' %>

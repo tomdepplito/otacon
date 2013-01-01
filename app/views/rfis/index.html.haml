@@ -1,5 +1,0 @@
-= link_to "Create RFI", new_rfi_path
-- @rfis.each do |rfi|
-  %h4= link_to rfi.body, rfi_path(rfi.id)
-  = link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => rfi.id }
-
