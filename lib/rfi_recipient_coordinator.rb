@@ -37,14 +37,14 @@ class RfiRecipientCoordinator
     employees.each do |employee|
       unless employee.id == @sender_id
         list = SpecialtyList.find_by_owner_id(employee.id)
-        @recipient_ids << list.owner_id if list && match?(list.specialties)
+        @recipient_ids << list.owner_id if list && match?(list.all_keywords)
       end
     end
   end
 
-  def match?(specialties)
+  def match?(all_keywords)
     @matches = []
-    specialties.each do |specialty|
+    all_keywords.each do |specialty|
       @matches << specialty if @keywords.detect { |keyword| specialty === keyword }
     end
     (@matches.length / @keywords.length.to_f) >= 0.5
