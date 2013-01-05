@@ -1,0 +1,16 @@
+<h1><%= "Create RFI" %></h1>
+
+<%= form_for @rfi do |f| %>
+  <%= f.label "Body" %>
+  <%= f.text_area :body %>
+  <br/>
+  <%= f.label "Street Address" %>
+  <%= f.text_field :street_address %>
+  <br/>
+  <%= label :miles, "Within" %>
+  <%= text_field_tag :miles %>
+  <%= label :miles , "Miles of me" %>
+  <%= hidden_field_tag :parent_id, @rfi.parent_id %>
+  <br/>
+  <%= f.submit %>
+<% end %>
