@@ -1,0 +1,22 @@
+<h1><%= "Edit #{@company.name}" %></h1>
+
+<p>
+<%= form_for @company do |f| %>
+  <%= f.label "Company Name:" %>
+  <%= f.text_field :name %>
+  <br/>
+    <%= f.submit %>
+<% end %>
+</p>
+
+<p>
+<% @employees.each do |employee| %>
+  <%= "#{employee.user.email} - #{employee.title}" %>
+  <%= link_to 'Remove', employee_path(employee.id), :method => 'delete' %>
+  <%= link_to 'Edit', edit_employee_path(employee.id) %>
+  <br/>
+<% end %>
+</p>
+
+<%= link_to 'Add Employee to Company', new_company_employee_path(@company.id) %>
+

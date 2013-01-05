@@ -1,0 +1,24 @@
+<h1>Edit Specialty List</h1>
+
+<div id="words">
+  <% @specialty_list.electronics.each_with_index do |word, index| %>
+    <div class = "electronics", id = "<%= index %>">
+      <%= unregex(word) %>
+    </div>
+  <% end %>
+</div>
+
+
+<%= form_for @specialty_list, :remote => true do |f| %>
+  <p>
+    <%= label_tag "Electronics" %>
+    <%= text_field_tag :electronics %>
+  </p>
+  <p>
+    <%= label_tag "Mechanical" %>
+    <%= text_field_tag :mechanical %>
+  </p>
+    <%= f.submit %>
+<% end %>
+
+<%= javascript_tag "var userId = #{current_user.id};" %>
