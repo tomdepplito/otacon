@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106003328) do
+ActiveRecord::Schema.define(:version => 20130106011132) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20130106003328) do
   end
 
   create_table "conversations", :force => true do |t|
-    t.integer  "receiver_id",      :null => false
     t.text     "body",             :null => false
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
@@ -31,7 +30,8 @@ ActiveRecord::Schema.define(:version => 20130106003328) do
     t.float    "latitude"
     t.float    "longitude"
     t.float    "match_percentage"
-    t.integer  "sender_id"
+    t.integer  "sender_id",        :null => false
+    t.integer  "receiver_id"
   end
 
   create_table "employees", :force => true do |t|

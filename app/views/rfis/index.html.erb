@@ -1,6 +1,6 @@
 <%= link_to "Create RFI", new_rfi_path %>
-<% @rfis.each do |rfi| %>
-  <h4><%= link_to rfi.body, rfi_path(rfi.id) %></h4>
+<% @rfis.each do |rfi, match| %>
+  <h4><%= link_to rfi.body, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
   <%= link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => rfi.id } %>
 <% end %>
 
