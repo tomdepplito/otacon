@@ -1,3 +1,3 @@
 class Conversation < ActiveRecord::Base
-  belongs_to :message
+  has_many :attachments
 end

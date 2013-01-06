@@ -10,7 +10,12 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, current_user.latitude, current_user.longitude, params[:miles])
+    employee = Employee.find_by_user_id(current_user.id)
+    if employee #Refactor This
+      rfi_coord = RfiRecipientCoordinator.new(employee.id, @rfi.body, employee.latitude, employee.longitude, params[:miles])
+    else
+      rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, nil, nil, params[:miles])
+    end
     if rfi_coord.messages.length > 0
       flash[:success] = "You've just sent #{rfi_coord.messages.length} messages"
       redirect_to rfis_path
