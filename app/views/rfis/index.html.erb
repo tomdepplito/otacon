@@ -2,5 +2,6 @@
 <% @rfis.each do |rfi, match| %>
   <h4><%= link_to rfi.body, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
   <%= link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => rfi.id } %>
+  <%= image_tag rfi.attachment_url.to_s %>
 <% end %>
 

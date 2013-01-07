@@ -5,6 +5,8 @@ gem 'rails', '3.2.7'
 gem 'haml-rails'
 gem 'devise'
 gem "geocoder"
+gem "rmagick"
+gem "carrierwave"
 
 group :production do
   gem 'pg'
