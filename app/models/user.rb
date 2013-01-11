@@ -5,19 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :street_address
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :rfis
-  has_one :specialty_list
 
   after_create :add_specialty_list
-
-  geocoded_by :street_address
-
-  after_validation :geocode, :if => :street_address_changed?
-
-  private
-
-  def add_specialty_list
-    SpecialtyList.create(:user_id => self.id)
-  end
 end
