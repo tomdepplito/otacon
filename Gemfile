@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jquery-rails'
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.11'
 gem 'haml-rails'
 gem 'devise'
 gem "geocoder"
