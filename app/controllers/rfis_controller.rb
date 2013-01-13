@@ -18,7 +18,6 @@ class RfisController < ApplicationController
     end
     if @rfi.save
       if params[:attachment] || params[:remote_attachment_url]
-        binding.pry
         @attachment = Attachment.new(:attachment => params[:attachment])
         @attachment.conversation_id = @rfi.id
         @attachment.save
