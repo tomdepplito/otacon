@@ -6,8 +6,9 @@ class Rfi < Conversation
 
   after_validation :geocode, :if => :street_address_changed?
 
-  attr_accessible :attachment, :remote_attachment_url
-  mount_uploader :attachment, AttachmentUploader
+  has_many :attachments, :foreign_key => :conversation_id, :dependent => :destroy
+
+  accepts_nested_attributes_for :attachments, :allow_destroy => true
 
   def keywords
     keywords = self.body.split(' ').select do |key_word|

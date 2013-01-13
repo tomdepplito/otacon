@@ -34,4 +34,6 @@ Otacon::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.serve_static_assets = false #setting this to true will enable images but don't do this
 end
