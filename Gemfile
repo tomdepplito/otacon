@@ -7,6 +7,7 @@ gem 'devise'
 gem "geocoder"
 gem "rmagick"
 gem "carrierwave"
+gem 'thin'
 
 group :production do
   gem 'pg'
