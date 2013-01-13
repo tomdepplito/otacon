@@ -12,7 +12,7 @@
   <%= label :miles , "Miles of me" %>
   <%= hidden_field_tag :parent_id, @rfi.parent_id %>
   <br/>
-  <ul>
+  <ul class ='file_list'>
   <%= f.fields_for :attachments do |builder| %>
     <li class='file_upload', id='0'>
       <%= render "file_upload_field", :f => builder %>
