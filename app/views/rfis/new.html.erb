@@ -12,10 +12,10 @@
   <%= label :miles , "Miles of me" %>
   <%= hidden_field_tag :parent_id, @rfi.parent_id %>
   <br/>
-  <%= f.file_field :attachment %>
+  <%= file_field_tag :attachment %>
   <br/>
-  <%= f.label :remote_attachment_url, "or image URL" %><br />
-  <%= f.text_field :remote_attachment_url %>
+  <%= label :remote_attachment_url, "or image URL" %><br />
+  <%= text_field_tag :remote_attachment_url %>
     <br/>
   <%= f.submit %>
 <% end %>

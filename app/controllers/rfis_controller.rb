@@ -17,6 +17,12 @@ class RfisController < ApplicationController
       @rfi.sender_id = user.id
     end
     if @rfi.save
+      if params[:attachment] || params[:remote_attachment_url]
+        binding.pry
+        @attachment = Attachment.new(:attachment => params[:attachment])
+        @attachment.conversation_id = @rfi.id
+        @attachment.save
+      end
       flash[:success] = "You've just sent a RFI"
       redirect_to rfis_path
     else
