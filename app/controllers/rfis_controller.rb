@@ -2,7 +2,7 @@ require 'rfi_recipient_coordinator'
 require 'address'
 
 class RfisController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :look_up_user
 
   def new
     @rfi = Rfi.new(:parent_id => params[:parent_id])
@@ -11,12 +11,7 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    employee = Employee.find_by_user_id(current_user.id)
-    if employee #Refactor This
-      @rfi.sender_id = employee.id
-    else
-      @rfi.sender_id = user.id
-    end
+    @rfi.sender_id = @user.id
     if @rfi.save
       flash[:success] = "You've just sent a RFI"
       redirect_to rfis_path
@@ -27,14 +22,15 @@ class RfisController < ApplicationController
   end
 
   def index
-    employee = Employee.find_by_user_id(current_user.id)
-    specialties = SpecialtyList.find_by_owner_id(employee.id).all_keywords
-    @rfis = Rfi.all
-    @rfi_match = {}
-    @rfis.each do |rfi|
-      @rfi_match[rfi] = match_percentage(specialties, rfi)
-    end
-    @rfis = @rfi_match.sort_by { |k, v| v }.reverse
+    #if @user.class.name == 'Employee'
+      specialties = SpecialtyList.find_by_owner_id(@user.id).all_keywords
+      @rfis = Rfi.all
+      @rfi_match = {}
+      @rfis.each do |rfi|
+        @rfi_match[rfi] = match_percentage(specialties, rfi)
+      end
+      @rfis = @rfi_match.sort_by { |k, v| v }.reverse
+    #end
   end
 
   def show
@@ -47,5 +43,10 @@ class RfisController < ApplicationController
       matches << specialty if rfi.keywords.detect { |keyword| specialty === keyword }
     end
     (matches.length / (rfi.keywords.length > 0 ? rfi.keywords.length.to_f : 1.0)) * 100
+  end
+
+  def look_up_user
+    @user = Employee.find_by_user_id(current_user.id)
+    @user ||= User.find(current_user.id)
   end
 end
