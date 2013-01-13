@@ -1,6 +1,6 @@
 <h1><%= "Create RFI" %></h1>
 
-<%= form_for @rfi, :html => {:multipart => true} do |f| %>
+<%= form_for @rfi, :html => {:multipart => true}, :remote => true do |f| %>
   <%= f.label "Body" %>
   <%= f.text_area :body %>
   <br/>
@@ -12,10 +12,15 @@
   <%= label :miles , "Miles of me" %>
   <%= hidden_field_tag :parent_id, @rfi.parent_id %>
   <br/>
-  <%= file_field_tag :attachment %>
+  <ul>
+  <%= f.fields_for :attachments do |builder| %>
+    <li class='file_upload', id='0'>
+      <%= render "file_upload_field", :f => builder %>
+    </li>
+  <% end %>
+</ul>
   <br/>
-  <%= label :remote_attachment_url, "or image URL" %><br />
-  <%= text_field_tag :remote_attachment_url %>
-    <br/>
+  <div class='add_file'><%= 'Add File' %></div>
+  <br/>
   <%= f.submit %>
 <% end %>

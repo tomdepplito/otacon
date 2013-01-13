@@ -6,6 +6,7 @@ class RfisController < ApplicationController
 
   def new
     @rfi = Rfi.new(:parent_id => params[:parent_id])
+    file = @rfi.attachments.build
   end
 
   def create
@@ -17,31 +18,12 @@ class RfisController < ApplicationController
       @rfi.sender_id = user.id
     end
     if @rfi.save
-      if params[:attachment] || params[:remote_attachment_url]
-        @attachment = Attachment.new(:attachment => params[:attachment])
-        @attachment.conversation_id = @rfi.id
-        @attachment.save
-      end
       flash[:success] = "You've just sent a RFI"
       redirect_to rfis_path
     else
       flash[:error] = "Sorry, we could not find any vendors for you.  Try modifying your search."
       render :new
     end
-    # @rfi = Rfi.new(params[:rfi])
-    # employee = Employee.find_by_user_id(current_user.id)
-    # if employee #Refactor This
-    #   rfi_coord = RfiRecipientCoordinator.new(employee.id, @rfi.body, employee.latitude, employee.longitude, params[:miles])
-    # else
-    #   rfi_coord = RfiRecipientCoordinator.new(current_user.id, @rfi.body, nil, nil, params[:miles])
-    # end
-    # if rfi_coord.messages.length > 0
-    #   flash[:success] = "You've just sent #{rfi_coord.messages.length} messages"
-    #   redirect_to rfis_path
-    # else
-    #   flash[:error] = "Sorry, we could not find any vendors for you.  Try modifying your search."
-    #   render :new
-    # end
   end
 
   def index
