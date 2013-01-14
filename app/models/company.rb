@@ -2,6 +2,7 @@ class Company < ActiveRecord::Base
   attr_accessible :name, :vendor
   has_many :offices
   has_many :employees
+  validates_presence_of :admin_id
   after_create :make_admin_employee
 
   def make_admin_employee

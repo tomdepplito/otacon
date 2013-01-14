@@ -18,5 +18,23 @@ describe Employee  do
       employee2 = FactoryGirl.build(:employee, :user_id => @user.id, :company_id => company2.id)
       employee2.save.should be true
     end
+
+    it 'should not be considered a vendor if the company is not a vendor' do
+      @employee1.vendor?.should == false
+    end
+
+    it 'should be considered a vendor if the company is a vendor' do
+      @company1.vendor = true
+      @company1.save
+      @employee1.vendor?.should == true
+    end
+
+    it 'should take on the street address of the office if it exists' do
+      user = FactoryGirl.create(:user)
+      office = FactoryGirl.create(:office, :company_id => @company1.id)
+      employee2 = FactoryGirl.create(:employee, :user_id => user.id,
+                                     :company_id => @company1.id, :office_id => office.id)
+      employee2.street_address.should == office.street_address
+    end
   end
 end

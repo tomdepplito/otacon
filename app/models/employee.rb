@@ -17,17 +17,8 @@ class Employee < ActiveRecord::Base
     User.find(self.user_id)
   end
 
-  def street_address
-    self.office.street_address
-  end
-
   def vendor?
-    company = self.company
-    unless company.blank?
-      company.vendor
-    else
-      false
-    end
+    self.company ? self.company.vendor : false
   end
 
   private
@@ -37,7 +28,7 @@ class Employee < ActiveRecord::Base
   end
 
   def add_street_address
-    if self.office_id
+    if self.office
       self.street_address = Office.find(self.office_id).street_address
     end
   end

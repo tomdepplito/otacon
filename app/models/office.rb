@@ -2,6 +2,7 @@ class Office < ActiveRecord::Base
   attr_accessible :street_address, :phone_num, :company_id
   belongs_to :company, :dependent => :destroy
   has_many :employees
+  validates_presence_of :company_id
 
   geocoded_by :street_address
 
