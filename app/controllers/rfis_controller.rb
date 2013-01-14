@@ -1,7 +1,7 @@
 require 'rfi_recipient_coordinator'
 
 class RfisController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :look_up_user
 
   def new
     @rfi = Rfi.new(:parent_id => params[:parent_id])
@@ -22,14 +22,15 @@ class RfisController < ApplicationController
   end
 
   def index
-    employee = Employee.find_by_user_id(current_user.id)
-    specialties = SpecialtyList.find_by_owner_id(employee.id).all_keywords
-    @rfis = Rfi.all
-    @rfi_match = {}
-    @rfis.each do |rfi|
-      @rfi_match[rfi] = match_percentage(specialties, rfi)
+    if @user.class.name == 'Employee'
+      specialties = SpecialtyList.find_by_owner_id(@user.id).all_keywords
+      @rfis = Rfi.all
+      @rfi_match = {}
+      @rfis.each do |rfi|
+        @rfi_match[rfi] = match_percentage(specialties, rfi)
+      end
+      @rfis = @rfi_match.sort_by { |k, v| v }.reverse
     end
-    @rfis = @rfi_match.sort_by { |k, v| v }.reverse
   end
 
   def show
@@ -42,5 +43,10 @@ class RfisController < ApplicationController
       matches << specialty if rfi.keywords.detect { |keyword| specialty === keyword }
     end
     (matches.length / (rfi.keywords.length > 0 ? rfi.keywords.length.to_f : 1.0)) * 100
+  end
+
+  def look_up_user
+    @user = Employee.find_by_user_id(current_user.id)
+    @user ||= User.find(current_user.id)
   end
 end

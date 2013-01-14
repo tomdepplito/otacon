@@ -12,9 +12,19 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div id="subscription"><%= render "shared/subscription" %></div>
+  <%= label_tag "Company Sign up" %>
+  <%= radio_button_tag :vendor, true %>
+  <%= label_tag "Yes" %>
+
+  <%= radio_button_tag :vendor, false %>
+  <%= label_tag "No" %>
+
+  <div id="subscription">
+    <%= render "shared/subscription" %>
+  </div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+<%= javascript_include_tag "subscription" %>
