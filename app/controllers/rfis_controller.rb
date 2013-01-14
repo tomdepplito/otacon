@@ -1,5 +1,4 @@
 require 'rfi_recipient_coordinator'
-require 'address'
 
 class RfisController < ApplicationController
   before_filter :authenticate_user!
@@ -12,11 +11,7 @@ class RfisController < ApplicationController
   def create
     @rfi = Rfi.new(params[:rfi])
     employee = Employee.find_by_user_id(current_user.id)
-    if employee #Refactor This
-      @rfi.sender_id = employee.id
-    else
-      @rfi.sender_id = user.id
-    end
+    @rfi.sender_id = employee ? employee.id : current_user.id
     if @rfi.save
       flash[:success] = "You've just sent a RFI"
       redirect_to rfis_path
