@@ -1,5 +1,4 @@
 require 'rfi_recipient_coordinator'
-require 'address'
 
 class RfisController < ApplicationController
   before_filter :authenticate_user!, :look_up_user
@@ -11,7 +10,8 @@ class RfisController < ApplicationController
 
   def create
     @rfi = Rfi.new(params[:rfi])
-    @rfi.sender_id = @user.id
+    employee = Employee.find_by_user_id(current_user.id)
+    @rfi.sender_id = employee ? employee.id : current_user.id
     if @rfi.save
       flash[:success] = "You've just sent a RFI"
       redirect_to rfis_path
@@ -22,7 +22,7 @@ class RfisController < ApplicationController
   end
 
   def index
-    #if @user.class.name == 'Employee'
+    if @user.class.name == 'Employee'
       specialties = SpecialtyList.find_by_owner_id(@user.id).all_keywords
       @rfis = Rfi.all
       @rfi_match = {}
@@ -30,7 +30,7 @@ class RfisController < ApplicationController
         @rfi_match[rfi] = match_percentage(specialties, rfi)
       end
       @rfis = @rfi_match.sort_by { |k, v| v }.reverse
-    #end
+    end
   end
 
   def show

@@ -7,8 +7,6 @@ FactoryGirl.define do
   factory :user do
     email { FactoryGirl.generate(:email) }
     password { FactoryGirl.generate(:string) }
-    vendor false
-    street_address "11768"
   end
 
   factory :employee do
@@ -21,29 +19,22 @@ FactoryGirl.define do
   factory :company do
     name { FactoryGirl.generate(:name) }
     admin_id { FactoryGirl.generate(:id) }
+    vendor false
   end
 
   factory :conversation do
     sender_id { FactoryGirl.generate(:id) }
-    receiver_id { FactoryGirl.generate(:id) }
     body { FactoryGirl.generate(:string) }
-    parent_id
   end
 
   factory :office do
-    street { FactoryGirl.generate(:string) }
-    house_num 2
-    state { FactoryGirl.generate(:string) }
-    zip 11768
+    street_address "11768"
     phone_num { FactoryGirl.generate(:string) }
     company_id { FactoryGirl.generate(:id) }
   end
 
   factory :specialty_list do
     employee
-    accumulators false
-    actuators false
-    fittings false
-    pumps false
+    electronics []
   end
 end
