@@ -1,13 +1,15 @@
 <%= link_to "Create RFI", new_rfi_path %>
-<% @rfis.each do |rfi, match| %>
-  <h4><%= link_to rfi.body, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
-  <%= link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => rfi.id } %>
-  <% if rfi.attachments.count > 0 %>
-    <% rfi.attachments.each do |attachment| %>
-      <% if attachment.attachment_url =~ /(.jpg|.png)/ %>
-        <%= link_to image_tag(attachment.attachment_url(:thumb)), attachment.attachment_url.to_s %>
-      <% else %>
-        <%= link_to attachment.attachment_url.to_s, attachment.attachment_url.to_s %>
+<% if @rfis %>
+  <% @rfis.each do |rfi, match| %>
+    <h4><%= link_to rfi.body, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
+    <%= link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => rfi.id } %>
+    <% if rfi.attachments.count > 0 %>
+      <% rfi.attachments.each do |attachment| %>
+        <% if attachment.attachment_url =~ /(.jpg|.png)/ %>
+          <%= link_to image_tag(attachment.attachment_url(:thumb)), attachment.attachment_url.to_s %>
+        <% else %>
+          <%= link_to attachment.attachment_url.to_s, attachment.attachment_url.to_s %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
