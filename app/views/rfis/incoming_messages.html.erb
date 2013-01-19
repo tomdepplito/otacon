@@ -2,7 +2,9 @@
 <% if @messages %>
   <% @messages.each do |message, match| %>
     <h4><%= link_to message.subject, rfi_path(message.id) %></h4><h3><%= "#{match}%" %></h3>
-    <%= link_to "Respond", {:controller => "rfis", :action => "new", :parent_id => message.id, :receiver_id => message.sender_id } %>
+    <%= link_to "Respond", {:controller => "rfis", :action => "new",
+                            :parent_id => message.parent_id ? message.parent_id : message.id,
+                            :receiver_id => message.sender_id } %>
     <% if message.attachments.count > 0 %>
       <% message.attachments.each do |attachment| %>
         <% if attachment.attachment_url =~ /(.jpg|.png)/ %>

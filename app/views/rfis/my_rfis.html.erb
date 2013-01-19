@@ -1,10 +1,6 @@
-<%= link_to "Create RFI", new_rfi_path %>
-<% if @rfis %>
-  <% @rfis.each do |rfi, match| %>
-    <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
-    <%= link_to "Respond", {:controller => "rfis", :action => "new",
-                            :parent_id => rfi.parent_id ? rfi.parent_id : rfi.id,
-                            :receiver_id => rfi.sender_id } %>
+<% if @sent_rfis %>
+  <% @sent_rfis.each do |rfi| %>
+    <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4><h3><%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %></h3>
     <% if rfi.attachments.count > 0 %>
       <% rfi.attachments.each do |attachment| %>
         <% if attachment.attachment_url =~ /(.jpg|.png)/ %>
@@ -16,4 +12,3 @@
     <% end %>
   <% end %>
 <% end %>
-
