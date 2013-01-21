@@ -31,12 +31,12 @@ class RfisController < ApplicationController
   end
 
   def show
-    @rfis = []
+    @previous_rfis = []
     @rfi = Rfi.find(params[:id])
     received_rfis = Rfi.where("parent_id = ? AND receiver_id = ? AND created_at < ?", @rfi.parent_id ? @rfi.parent_id : @rfi.id, @user.id, @rfi.created_at)
     sent_rfis = Rfi.where("parent_id = ? AND sender_id = ? AND created_at < ?", @rfi.id, @user.id, @rfi.created_at)
-    @rfis += received_rfis
-    @rfis += sent_rfis
+    @previous_rfis += received_rfis
+    @previous_rfis += sent_rfis
   end
 
   def incoming_messages

@@ -1,0 +1,4 @@
+<% parent_rfi.responses.each do |rfi| %>
+  <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi } %>
+  <% render :partial => "display_attachments", :locals => { :rfi => rfi } %>
+<% end %>

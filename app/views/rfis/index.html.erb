@@ -1,19 +1,7 @@
 <%= link_to "Create RFI", new_rfi_path %>
-<% if @rfis %>
-  <% @rfis.each do |rfi, match| %>
-    <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4><h3><%= "#{match}%" %></h3>
-    <%= link_to "Respond", {:controller => "rfis", :action => "new",
-                            :parent_id => rfi.parent_id ? rfi.parent_id : rfi.id,
-                            :receiver_id => rfi.sender_id } %>
-    <% if rfi.attachments.count > 0 %>
-      <% rfi.attachments.each do |attachment| %>
-        <% if attachment.attachment_url =~ /(.jpg|.png)/ %>
-          <%= link_to image_tag(attachment.attachment_url(:thumb)), attachment.attachment_url.to_s %>
-        <% else %>
-          <%= link_to attachment.attachment_url.to_s, attachment.attachment_url.to_s %>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% end %>
+
+<% @rfis.each do |rfi, match| %>
+  <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi, :match => match } %>
+  <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
 <% end %>
 
