@@ -5,10 +5,14 @@ class Rfi < Conversation
   after_validation :geocode, :if => :street_address_changed?
 
   has_many :attachments, :foreign_key => :conversation_id, :dependent => :destroy
+  belongs_to :user
+  belongs_to :employee
 
   accepts_nested_attributes_for :attachments, :allow_destroy => true
 
   scope :all_parent_messages, lambda { where("parent_id IS NULL") }
+
+  scope :responses, lambda { where("parent_id = ?", self.id) }
 
   def responses
     Rfi.find_all_by_parent_id(self.id)

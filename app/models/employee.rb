@@ -3,6 +3,8 @@ class Employee < ActiveRecord::Base
   belongs_to :office
   belongs_to :company
   has_one :specialty_list, :foreign_key => :owner_id
+  has_many :conversations, :foreign_key => :sender_id
+  has_many :rfis, :foreign_key => :sender_id
   validates_presence_of :company_id
   validates_uniqueness_of :user_id, :scope => :company_id
   after_create :add_specialty_list, :add_street_address

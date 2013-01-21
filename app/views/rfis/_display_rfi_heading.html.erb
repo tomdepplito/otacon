@@ -1,0 +1,11 @@
+<h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
+
+<% if defined? match %>
+  <h3><%= "#{match}%" %></h3>
+<% end %>
+
+<div class='response'>
+  <%= link_to "Respond", {:controller => "rfis", :action => "new",
+                          :parent_id => rfi.parent_id ? rfi.parent_id : rfi.id,
+                          :receiver_id => rfi.sender_id } %>
+</div>

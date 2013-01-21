@@ -25,25 +25,39 @@ class RfisController < ApplicationController
 
   def index
     if @user.class.name == 'Employee'
-      specialties = SpecialtyList.find_by_owner_id(@user.id).all_keywords
-      @rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
-      @rfi_match = {}
-      @rfis.each do |rfi|
-        @rfi_match[rfi] = match_percentage(specialties, rfi)
-      end
-      @rfis = @rfi_match.sort_by { |k, v| v }.reverse
+      all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
+      @rfis = sort_by_match(all_rfis)
     end
   end
 
   def show
+    @previous_rfis = []
     @rfi = Rfi.find(params[:id])
+    received_rfis = Rfi.where("parent_id = ? AND receiver_id = ? AND created_at < ?", @rfi.parent_id ? @rfi.parent_id : @rfi.id, @user.id, @rfi.created_at)
+    sent_rfis = Rfi.where("parent_id = ? AND sender_id = ? AND created_at < ?", @rfi.id, @user.id, @rfi.created_at)
+    @previous_rfis += received_rfis
+    @previous_rfis += sent_rfis
   end
 
   def incoming_messages
-    @messages = Rfi.find_all_by_receiver_id(@user.id)
+    all_messages = Rfi.find_all_by_receiver_id(@user.id)
+    @messages = sort_by_match(all_messages)
+  end
+
+  def my_rfis
+    @sent_rfis = @user.rfis.select { |rfi| rfi.parent_id.nil? }
   end
 
   private
+
+  def sort_by_match(rfis)
+    specialties = SpecialtyList.find_by_owner_id(@user.id).all_keywords
+    rfis_match = {}
+    rfis.each do |rfi|
+      rfis_match[rfi] = match_percentage(specialties, rfi)
+    end
+    rfis_match.sort_by { |k, v| v }.reverse
+  end
 
   def match_percentage(employee_specialties, rfi)
     matches = []

@@ -9,6 +9,7 @@ Otacon::Application.routes.draw do
   resources :offices
   resources :rfis
   match 'incoming_messages' => 'rfis#incoming_messages'
+  match 'my_rfis' => 'rfis#my_rfis'
   resources :specialty_lists
   root :to => "users#index"
 end

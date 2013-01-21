@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  has_many :rfis
+  has_many :conversations, :foreign_key => :sender_id
+  has_many :rfis, :foreign_key => :sender_id
 end
