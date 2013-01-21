@@ -1,4 +1,4 @@
-<%= link_to "Create RFI", new_rfi_path %>
+<%= render :partial => "rfi_header" %>
 
 <% @messages.each do |message, match| %>
   <%= render :partial => "display_rfi_heading", :locals => { :rfi => message, :match => match } %>

@@ -1,3 +1,5 @@
+<%= render :partial => "rfi_header" %>
+
 <% @previous_rfis.each do |rfi| %>
   <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi } %>
   <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>

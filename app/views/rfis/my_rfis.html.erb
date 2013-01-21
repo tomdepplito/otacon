@@ -1,3 +1,5 @@
+<%= render :partial => "rfi_header" %>
+
 <% @sent_rfis.each do |rfi| %>
   <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
   <h3><%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %></h3>
