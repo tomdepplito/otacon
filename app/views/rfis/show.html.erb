@@ -1,8 +1,6 @@
 <% @previous_rfis.each do |rfi| %>
   <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi } %>
-  <% if rfi.attachments.count > 0 %>
-    <% render :partial => "display_attachments", :locals => { :rfi => rfi } %>
-  <% end %>
+  <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
 <% end %>
 
 <%= render :partial => "display_rfi", :locals => { :rfi => @rfi } %>
