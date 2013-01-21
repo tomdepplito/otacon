@@ -26,7 +26,7 @@ class RfisController < ApplicationController
   def index
     if @user.class.name == 'Employee'
       all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
-      @rfis = sort_by_match(all_rfis)
+      @rfis = all_rfis.nil? ? [] : sort_by_match(all_rfis)
     end
   end
 
