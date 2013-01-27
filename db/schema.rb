@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115034015) do
+ActiveRecord::Schema.define(:version => 20130127015338) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "conversation_id"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(:version => 20130115034015) do
     t.integer  "owner_id"
     t.text     "electronics"
     t.text     "mechanical"
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "plan"
+    t.integer  "company_id"
+    t.string   "stripe_customer_token"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "email"
   end
 
   create_table "users", :force => true do |t|

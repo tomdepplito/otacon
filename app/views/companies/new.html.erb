@@ -1,9 +1,28 @@
+<% content_for :head do %>
+  <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<% end %>
+
+<% content_for :head_pub_key do %>
+  <script type="text/javascript">
+    Stripe.setPublishableKey('pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn');
+  </script>
+<% end %>
+
+<div id="stripe_error"></div>
+
 <h1>New Company Page</h1>
 
-<%= form_for @company do |f| %>
+<%= form_for @company, :id => "new-company" do |f| %>
   <p>
     <%= f.label "Company Name:" %>
     <%= f.text_field :name  %>
   </p>
-    <%= f.submit %>
+
+  <div id="subscription">
+    <%= render "shared/subscription" %>
+  </div>
+
+  <%= hidden_field nil, :stripe_card_token %>
+
+  <%= f.submit %>
 <% end %>

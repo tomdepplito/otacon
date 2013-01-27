@@ -8,6 +8,8 @@ gem "geocoder"
 gem "rmagick"
 gem "carrierwave"
 gem 'thin'
+gem 'stripe'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'

@@ -1,6 +1,7 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+                       :id => "new-registration-form") do |f| %>
   <%= devise_error_messages! %>
 
   <div><%= f.label :email %><br />
@@ -18,10 +19,6 @@
 
   <%= radio_button_tag :vendor, false %>
   <%= label_tag "No" %>
-
-  <div id="subscription">
-    <%= render "shared/subscription" %>
-  </div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

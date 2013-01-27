@@ -10,7 +10,10 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     @company.admin_id = current_user.id
+    @subscription = Subscription.new(:stripe_customer_token => params[:stripe_card_token], :plan => 1)
     if @company.save
+      @subscription.company_id = @company.id
+      @subscription.save_with_payment
       flash[:success] = "You've created a company"
       redirect_to company_path(@company)
     else
