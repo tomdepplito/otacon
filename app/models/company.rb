@@ -5,6 +5,7 @@ class Company < ActiveRecord::Base
   has_one :subscription, :dependent => :destroy
   validates_presence_of :admin_id, :name
   after_create :make_admin_employee
+  belongs_to :user
 
   def make_admin_employee
     Employee.create(:user_id => self.admin_id, :company_id => self.id)

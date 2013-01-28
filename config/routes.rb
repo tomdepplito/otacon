@@ -11,5 +11,11 @@ Otacon::Application.routes.draw do
   match 'incoming_messages' => 'rfis#incoming_messages'
   match 'my_rfis' => 'rfis#my_rfis'
   resources :specialty_lists
+  resources :subscriptions do
+    member do
+      get 'edit_card'
+      post 'edit_card'
+    end
+  end
   root :to => "users#index"
 end

@@ -1,0 +1,22 @@
+<%= form_for @subscription, :html => { :id => "edit_subscription" } do |f| %>
+
+<%= link_to "Change Card", edit_card_subscription_path(@subscription.id) %>
+
+<div>
+  <%= label_tag "Subscription Status: #{@customer.subscription ? 'Active' : 'Inactive'}" %>
+</div>
+
+  <% if @customer.subscription %>
+    <div>
+      <%= label_tag "Cancel Subscription:" %>
+
+      <%= radio_button_tag :cancel_subscription, true %>
+      <%= label_tag "Yes" %>
+
+      <%= radio_button_tag :cancel_subscription, false, :checked => true %>
+      <%= label_tag "No" %>
+    </div>
+  <% end %>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>

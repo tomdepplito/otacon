@@ -3,7 +3,7 @@ class Subscription < ActiveRecord::Base
 
   belongs_to :company
 
-  validates_presence_of :company_id
+  validates_presence_of :company_id, :plan, :stripe_customer_token
 
   def save_with_payment
     if valid?

@@ -4,12 +4,12 @@ function stripeResponseHandler(status, response) {
       $('input[type=submit]').attr('disabled', false)
    } else {
       $('#_stripe_card_token').val(response.id)
-      $('#new_company')[0].submit()
+      $('#new_subscription')[0].submit()
     };
 }
 
 $(function() {
-  $('#new_company').submit(function(event) {
+  $('#new_subscription').submit(function(event) {
     // Disable the submit button to prevent repeated clicks
     $('.submit-button').prop('disabled', true);
 

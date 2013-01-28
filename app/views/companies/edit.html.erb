@@ -1,5 +1,7 @@
 <h1><%= "Edit #{@company.name}" %></h1>
 
+<%= link_to "Edit Subscription", edit_subscription_path(@subscription.id) %>
+
 <p>
 <%= form_for @company do |f| %>
   <%= f.label "Company Name:" %>

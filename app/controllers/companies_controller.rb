@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(params[:company])
     @company.admin_id = current_user.id
     @subscription = Subscription.new(:stripe_customer_token => params[:stripe_card_token], :plan => 1)
+    binding.pry
     if @company.save
       @subscription.company_id = @company.id
       @subscription.save_with_payment
@@ -28,6 +29,8 @@ class CompaniesController < ApplicationController
 
   def edit
     @employees = @company.employees
+    @subscription = @company.subscription
+    @customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
   end
 
   def update
