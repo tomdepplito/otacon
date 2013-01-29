@@ -10,8 +10,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     @company.admin_id = current_user.id
-    @subscription = Subscription.new(:stripe_customer_token => params[:stripe_card_token], :plan => 1)
-    binding.pry
+    @subscription = Subscription.new(:stripe_card_token => params[:stripe_card_token], :plan => params[:plan])
     if @company.save
       @subscription.company_id = @company.id
       @subscription.save_with_payment
