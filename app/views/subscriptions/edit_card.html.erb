@@ -1,0 +1,22 @@
+<% content_for :head do %>
+  <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<% end %>
+
+<% content_for :head_pub_key do %>
+  <script type="text/javascript">
+    Stripe.setPublishableKey('pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn');
+  </script>
+<% end %>
+
+<%= form_for @subscription, :url => edit_card_subscription_path, :method => 'post', :html => { :id => "new_subscription" } do |f| %>
+
+  <%= label_tag "Subscription Status: #{@customer.subscription ? 'Active' : 'Inactive'}" %>
+
+  <div id="subscription">
+    <%= render "shared/subscription" %>
+  </div>
+
+  <%= hidden_field nil, :stripe_card_token %>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
