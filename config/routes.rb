@@ -17,5 +17,6 @@ Otacon::Application.routes.draw do
       post 'edit_card'
     end
   end
+  match '/subscriptions_listener' => 'subscriptions#listener', :via => [:post, :get]
   root :to => "users#index"
 end

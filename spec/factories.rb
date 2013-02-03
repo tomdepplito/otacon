@@ -37,4 +37,12 @@ FactoryGirl.define do
     employee
     electronics []
   end
+
+  factory :subscription do
+    company
+    stripe_card_token { FactoryGirl.generate(:string) }
+    stripe_customer_token { FactoryGirl.generate(:string) }
+    active false
+    plan '1'
+  end
 end
