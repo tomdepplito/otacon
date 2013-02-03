@@ -1,2 +1,12 @@
-<div><%= label :name_on_card, 'name on card' %><br />
-  <%= text_field_tag :name_on_card %></div>
+<div><%= label :card_number, 'Card Number:' %><br />
+<%= text_field_tag :card_number, nil, :name => nil, :class => "card-number" %></div>
+
+<div><%= label :card_cvc, 'Security Code:' %><br />
+<%= text_field_tag :card_cvc, nil, :name => nil, :class => "card-cvc" %></div>
+
+<div><%= label 'Expiration (MM/YYYY):', 'Expiration (MM/YYYY):' %><br />
+<div><%= label 'Month:', 'Month:' %><br />
+<%= select_month nil, {add_month_numbers: true}, :name => nil, :class => "card-expiry-month" %></div>
+
+<div><%= label 'Year:', 'Year:' %><br />
+<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, :name => nil, :class => "card-expiry-year" %></div>

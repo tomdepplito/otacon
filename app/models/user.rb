@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :conversations, :foreign_key => :sender_id
   has_many :rfis, :foreign_key => :sender_id
+  has_one :company, :foreign_key => :admin_id
 end

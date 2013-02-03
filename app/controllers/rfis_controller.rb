@@ -25,8 +25,13 @@ class RfisController < ApplicationController
 
   def index
     if @user.class.name == 'Employee'
-      all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
-      @rfis = all_rfis.nil? ? [] : sort_by_match(all_rfis)
+      if @user.company.subscription.active
+        all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
+        @rfis = all_rfis.nil? ? [] : sort_by_match(all_rfis)
+      else
+        flash[:error] = "Subscription is Inactive.  Please contact your company admin."
+        redirect_to :root
+      end
     end
   end
 

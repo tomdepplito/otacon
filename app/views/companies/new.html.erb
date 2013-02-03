@@ -1,9 +1,33 @@
+<% content_for :head do %>
+  <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<% end %>
+
+<% content_for :head_pub_key do %>
+  <script type="text/javascript">
+    Stripe.setPublishableKey('pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn');
+  </script>
+<% end %>
+
+<div id="stripe_error"></div>
+
 <h1>New Company Page</h1>
 
-<%= form_for @company do |f| %>
+<%= form_for @company, :html => { :id => "new_subscription" } do |f| %>
   <p>
     <%= f.label "Company Name:" %>
     <%= f.text_field :name  %>
   </p>
-    <%= f.submit %>
+
+  <div>
+    <%= label_tag 'Subscription Plan:' %><br />
+    <%= select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => ['Plan 2 - $50.00/month', 2]) %>
+  </div>
+
+  <div id="subscription">
+    <%= render "shared/subscription" %>
+  </div>
+
+  <%= hidden_field nil, :stripe_card_token %>
+
+  <%= f.submit %>
 <% end %>
