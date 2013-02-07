@@ -10,14 +10,12 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(params[:company])
     @company.admin_id = current_user.id
-    puts params
     @subscription = Subscription.new(:stripe_card_token => params[:stripe_card_token], :plan => params[:plan])
     if @company.save
       @subscription.company_id = @company.id
-      if @subscription.save_with_payment
-        flash[:success] = "You've created a company"
-        redirect_to company_path(@company)
-      end
+      @subscription.save_with_payment
+      flash[:success] = "You've created a company"
+      redirect_to company_path(@company)
     else
       flash[:error] = "Something went wrong"
       render :new
