@@ -37,3 +37,7 @@ Otacon::Application.configure do
 
   config.serve_static_assets = false #setting this to true will enable images but don't do this
 end
+
+stripe = YAML::load_file("#{Rails.root}/config/stripe.yml")['dev']
+Stripe.api_key = stripe['api_key']
+STRIPE_PUBLIC_KEY = stripe['public_key']
