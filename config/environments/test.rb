@@ -35,3 +35,7 @@ Otacon::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+stripe = YAML::load_file("#{Rails.root}/config/stripe.yml")['test']
+Stripe.api_key = stripe['api_key']
+STRIPE_PUBLIC_KEY = stripe['public_key']

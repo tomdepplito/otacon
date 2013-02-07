@@ -65,3 +65,7 @@ Otacon::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+stripe = YAML::load_file("#{Rails.root}/config/stripe.yml")['production']
+Stripe.api_key = stripe['api_key']
+STRIPE_PUBLIC_KEY = stripe['public_key']
