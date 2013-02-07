@@ -1,0 +1,12 @@
+dev:
+  api_key: 'sk_test_Cn7gQsFkkWEmZtMXaxWzGdok'
+  public_key: 'pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn'
+test:
+  api_key: 'sk_test_Cn7gQsFkkWEmZtMXaxWzGdok'
+  public_key: 'pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn'
+staging:
+  api_key: 'sk_test_Cn7gQsFkkWEmZtMXaxWzGdok'
+  public_key: 'pk_test_SNPtX8Y49EZ4xxkVFVFxHtRn'
+production:
+  api_key: 'sk_live_V3zjwXLcRcMW0J6meimYNMFo'
+  public_key: 'pk_live_quxpyPKrXz8j17ZiFSysSFD3'
