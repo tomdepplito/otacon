@@ -16,7 +16,7 @@ class RfisController < ApplicationController
     @rfi.sender_id = employee ? employee.id : current_user.id
     if @rfi.save
       flash[:success] = "You've just sent a RFI"
-      redirect_to rfis_path
+      redirect_to my_rfis_path
     else
       flash[:error] = "Sorry, we could not find any vendors for you.  Try modifying your search."
       render :new
@@ -24,7 +24,10 @@ class RfisController < ApplicationController
   end
 
   def index
-    if @user.class.name == 'Employee'
+    if @user.class.name == 'User'
+      flash[:error] = "Create a company account to accesss this page"
+      redirect_to new_company_path
+    elsif @user.class.name == 'Employee'
       if @user.company.subscription.active
         all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
         @rfis = all_rfis.nil? ? [] : sort_by_match(all_rfis)
@@ -32,6 +35,8 @@ class RfisController < ApplicationController
         flash[:error] = "Subscription is Inactive.  Please contact your company admin."
         redirect_to :root
       end
+    else
+      redirect_to :root
     end
   end
 
@@ -46,7 +51,13 @@ class RfisController < ApplicationController
 
   def incoming_messages
     all_messages = Rfi.find_all_by_receiver_id(@user.id)
-    @messages = sort_by_match(all_messages)
+    if @user.class.name == 'User'
+      @messages = all_messages.sort
+    elsif @user.class.name == 'Employee'
+      @messages = sort_by_match(all_messages)
+    else
+      redirect_to :root
+    end
   end
 
   def my_rfis
@@ -73,7 +84,7 @@ class RfisController < ApplicationController
   end
 
   def look_up_user
-    @user = Employee.find_by_user_id(current_user.id)
-    @user ||= User.find(current_user.id)
+    return if @user = Employee.find_by_user_id(current_user.id)
+    @user = User.find(current_user.id)
   end
 end
