@@ -42,6 +42,20 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def add_employee
+    @company = Company.find(params[:id])
+    @employee = Employee.new
+    if params[:email].present?
+      @future_employee = User.find_by_email(params[:email])
+      Notifier.new_employee_confirmation(@future_employee, @company).deliver unless @future_employee.nil?
+      flash[:success] = "Employee has been notified"
+      redirect_to company_path(@company)
+    else
+      flash[:error] = "Need Employee Email"
+      render :add_employee
+    end
+  end
+
   private
 
   def check_admin_status

@@ -43,6 +43,19 @@ class EmployeesController < ApplicationController
     redirect_to edit_company_path(@company.id)
   end
 
+  def validate_employee
+    @employee = Employee.new
+    @employee.user_id = User.find_by_email(params[:email]).id
+    @employee.company_id = params[:company_id]
+    if @employee.save
+      flash[:success] = "Email Validated!"
+      redirect_to :root
+    else
+      flash[:error] = "Something went wrong"
+      render :status => 500
+    end
+  end
+
   private
 
   def get_company_info
