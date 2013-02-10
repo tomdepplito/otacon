@@ -9,4 +9,12 @@ class User < ActiveRecord::Base
   has_many :conversations, :foreign_key => :sender_id
   has_many :rfis, :foreign_key => :sender_id
   has_one :company, :foreign_key => :admin_id
+
+  after_create :send_email
+
+  private
+
+  def send_email
+    Notifier.signup_email(self).deliver if valid?
+  end
 end
