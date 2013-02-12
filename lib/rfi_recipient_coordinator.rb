@@ -29,14 +29,14 @@ class RfiRecipientCoordinator
   end
 
   def get_employees
-    employees = @distance.blank? ? Employee.vendors : Employee.vendors.near([@latitude, @longitude], @distance)
-    get_specialty_lists(employees)
+    users = @distance.blank? ? User.vendors : User.vendors.near([@latitude, @longitude], @distance)
+    get_specialty_lists(users)
   end
 
-  def get_specialty_lists(employees)
-    employees.each do |employee|
-      unless employee.id == @sender_id
-        list = SpecialtyList.find_by_owner_id(employee.id)
+  def get_specialty_lists(users)
+    users.each do |user|
+      unless user.id == @sender_id
+        list = SpecialtyList.find_by_owner_id(user.id)
         @recipient_ids << list.owner_id if list && match?(list.all_keywords)
       end
     end
