@@ -5,8 +5,7 @@ class Rfi < Conversation
   after_validation :geocode, :if => :street_address_changed?
 
   has_many :attachments, :foreign_key => :conversation_id, :dependent => :destroy
-  belongs_to :user
-  belongs_to :employee
+  belongs_to :employee, :class_name => 'User'
 
   accepts_nested_attributes_for :attachments, :allow_destroy => true
 
