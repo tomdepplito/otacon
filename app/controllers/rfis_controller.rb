@@ -27,7 +27,7 @@ class RfisController < ApplicationController
       flash[:error] = "Create a company account to accesss this page"
       redirect_to new_company_path
     elsif current_user.company.subscription.active
-      all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != @user.id }
+      all_rfis = Rfi.all_parent_messages.select { |rfi| rfi.sender_id != current_user.id }
       @rfis = all_rfis.nil? ? [] : sort_by_match(all_rfis)
     else
       flash[:error] = "Subscription is Inactive.  Please contact your company admin."
