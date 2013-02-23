@@ -1,18 +1,20 @@
 require 'spec_helper'
 
-describe Company  do
+describe Company do
+  subject do
+    FactoryGirl.create(:company, :admin_id => FactoryGirl.create(:user).id)
+  end
+
   context 'when a new company is created' do
-    before :each do
-      @user = FactoryGirl.create(:user)
-      @company = FactoryGirl.create(:company, :admin_id => @user.id)
-    end
-
-    it 'should add the company admin as an employee' do
-      @company.employees.first.user_id.should == @company.admin_id
-    end
-
     it 'should only have one employee just after creation' do
-      @company.employees.count.should == 1
+      subject.employees.count.should == 1
+    end
+  end
+
+  context 'when adding an office to a company' do
+    it 'should increase the office count by 1' do
+      office = FactoryGirl.create(:office, :company => subject)
+      subject.offices.count.should == 1
     end
   end
 end
