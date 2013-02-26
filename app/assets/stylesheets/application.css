@@ -12,6 +12,7 @@
  *= require_tree .
  */
 
+/*
  .button {
    font-size: 15px;
    font-family: Georgia, serif;
@@ -129,4 +130,7 @@
 }.rfis-table tr:last-child td:last-child{
   border-width:0px 0px 0px 0px;
 }
-
+*/
+.login {
+  float: right;
+}

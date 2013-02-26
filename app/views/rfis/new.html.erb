@@ -5,19 +5,21 @@
 <%= form_for @rfi, :html => {:multipart => true} do |f| %>
   <%= f.label "Subject" %>
   <%= f.text_field :subject %>
-  <br/>
-  <%= f.label "Body" %>
-  <%= f.text_area :body %>
-  <br/>
+
+  <div style="">
+    <%= f.label "Body" %>
+    <%= f.text_area :body %>
+  </div>
+
   <%= f.label "Street Address" %>
   <%= f.text_field :street_address %>
-  <br/>
+
   <%= label :miles, "Within" %>
   <%= text_field_tag :miles %>
   <%= label :miles , "Miles of me" %>
   <%= hidden_field_tag :parent_id, @rfi.parent_id %>
   <%= hidden_field_tag :receiver_id, @rfi.receiver_id %>
-  <br/>
+
   <ul class ='file_list'>
   <%= f.fields_for :attachments do |builder| %>
     <li class='file_upload', id='0'>
@@ -25,8 +27,6 @@
     </li>
   <% end %>
 </ul>
-  <br/>
   <div class='add_file'><%= 'Add File' %></div>
-  <br/>
   <%= f.submit %>
 <% end %>
