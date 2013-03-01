@@ -1,20 +1,22 @@
-<%= render :partial => "rfi_header" %>
+<div class='container'>
+  <%= render :partial => "rfi_header" %>
 
-<% @previous_rfis.each do |rfi| %>
-  <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi } %>
-  <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
-<% end %>
+  <% @previous_rfis.each do |rfi| %>
+    <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi } %>
+    <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
+  <% end %>
 
-<%= render :partial => "display_rfi", :locals => { :rfi => @rfi } %>
+  <%= render :partial => "display_rfi", :locals => { :rfi => @rfi } %>
 
-<% unless @user.id == @rfi.sender_id %>
-  <div class='response'>
-    <%= link_to "Respond", {:controller => "rfis", :action => "new",
-                            :parent_id => @rfi.parent_id ? @rfi.parent_id : @rfi.id,
-                            :receiver_id => @rfi.sender_id } %>
-  </div>
-<% end %>
+  <% unless @user.id == @rfi.sender_id %>
+    <div class='response'>
+      <%= link_to "Respond", {:controller => "rfis", :action => "new",
+                              :parent_id => @rfi.parent_id ? @rfi.parent_id : @rfi.id,
+                              :receiver_id => @rfi.sender_id } %>
+    </div>
+  <% end %>
 
-<% if @user.id == @rfi.sender_id %>
-  <%= render :partial => "display_rfi_responses", :locals => { :parent_rfi => @rfi } %>
-<% end %>
+  <% if @user.id == @rfi.sender_id %>
+    <%= render :partial => "display_rfi_responses", :locals => { :parent_rfi => @rfi } %>
+  <% end %>
+</div>

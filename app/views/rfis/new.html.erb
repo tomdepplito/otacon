@@ -1,32 +1,34 @@
-<%= render :partial => "rfi_header" %>
+<div class='container'>
+  <%= render :partial => "rfi_header" %>
 
-<h1><%= "Create RFI" %></h1>
+  <h1><%= "Create RFI" %></h1>
 
-<%= form_for @rfi, :html => {:multipart => true} do |f| %>
-  <%= f.label "Subject" %>
-  <%= f.text_field :subject %>
+  <%= form_for @rfi, :html => {:multipart => true} do |f| %>
+    <%= f.label "Subject" %>
+    <%= f.text_field :subject %>
 
-  <div style="">
-    <%= f.label "Body" %>
-    <%= f.text_area :body %>
-  </div>
+    <div style="">
+      <%= f.label "Body" %>
+      <%= f.text_area :body %>
+    </div>
 
-  <%= f.label "Street Address" %>
-  <%= f.text_field :street_address %>
+    <%= f.label "Street Address" %>
+    <%= f.text_field :street_address %>
 
-  <%= label :miles, "Within" %>
-  <%= text_field_tag :miles %>
-  <%= label :miles , "Miles of me" %>
-  <%= hidden_field_tag :parent_id, @rfi.parent_id %>
-  <%= hidden_field_tag :receiver_id, @rfi.receiver_id %>
+    <%= label :miles, "Within" %>
+    <%= text_field_tag :miles %>
+    <%= label :miles , "Miles of me" %>
+    <%= hidden_field_tag :parent_id, @rfi.parent_id %>
+    <%= hidden_field_tag :receiver_id, @rfi.receiver_id %>
 
-  <ul class ='file_list'>
-  <%= f.fields_for :attachments do |builder| %>
-    <li class='file_upload', id='0'>
-      <%= render "file_upload_field", :f => builder %>
-    </li>
+    <ul class ='file_list'>
+    <%= f.fields_for :attachments do |builder| %>
+      <li class='file_upload', id='0'>
+        <%= render "file_upload_field", :f => builder %>
+      </li>
+    <% end %>
+  </ul>
+    <div class='add_file'><%= 'Add File' %></div>
+    <%= f.submit %>
   <% end %>
-</ul>
-  <div class='add_file'><%= 'Add File' %></div>
-  <%= f.submit %>
-<% end %>
+</div>

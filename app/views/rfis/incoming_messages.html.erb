@@ -1,6 +1,8 @@
-<%= render :partial => "rfi_header" %>
+<div class='container'>
+  <%= render :partial => "rfi_header" %>
 
-<% @messages.each do |message, match| %>
-  <%= render :partial => "display_rfi_heading", :locals => { :rfi => message, :match => match } %>
-  <%= render :partial => "display_attachments", :locals => { :rfi => message } %>
-<% end %>
+  <% @messages.each do |message, match| %>
+    <%= render :partial => "display_rfi_heading", :locals => { :rfi => message, :match => match } %>
+    <%= render :partial => "display_attachments", :locals => { :rfi => message } %>
+  <% end %>
+</div>

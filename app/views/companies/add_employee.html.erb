@@ -1,10 +1,10 @@
-<h1><%= "#{@company.name} Employee Roster" %></h1>
+<div class='container'>
+  <h1><%= "#{@company.name} Employee Roster" %></h1>
 
-<%= form_for @employee, :url => add_employee_company_path(@company.id), :method => 'post' do |f| %>
-  <%= label '', "Employee Email:" %>
-  <%= text_field_tag :email %>
-  <br/>
-  <%= hidden_field_tag :company_id, @company.id %>
-  <br/>
-  <%= f.submit %>
-<% end %>
+  <%= form_for @employee, :url => add_employee_company_path(@company.id), :method => 'post' do |f| %>
+    <%= label '', "Employee Email:" %>
+    <%= text_field_tag :email %>
+    <%= hidden_field_tag :company_id, @company.id %>
+    <%= f.submit %>
+  <% end %>
+</div>

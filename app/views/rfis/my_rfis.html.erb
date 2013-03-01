@@ -1,17 +1,19 @@
-<%= render :partial => "rfi_header" %>
+<div class='container'>
+  <%= render :partial => "rfi_header" %>
 
-<div class='rfis'>
-  <table class='rfis-table'>
-    <% @sent_rfis.each do |rfi| %>
-      <tr>
-        <td>
-          <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
-        </td>
-        <td>
-          <h3><%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %></h3>
-        </td>
-        <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
-      </tr>
-    <% end %>
-  </table>
+  <div class='rfis'>
+    <table class='rfis-table'>
+      <% @sent_rfis.each do |rfi| %>
+        <tr>
+          <td>
+            <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
+          </td>
+          <td>
+            <h3><%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %></h3>
+          </td>
+          <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
