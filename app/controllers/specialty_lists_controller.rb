@@ -25,12 +25,7 @@ class SpecialtyListsController < ApplicationController
   private
 
   def get_specialty_list
-    employee = Employee.find_by_user_id(current_user.id)
-    if employee
-      @specialty_list = SpecialtyList.find_by_owner_id(employee.id)
-    else
-      @specialty_list = SpecialtyList.find_by_owner_id(current_user.id)
-    end
+    @specialty_list = SpecialtyList.find_by_owner_id(current_user.id)
   end
 
   def to_regex(string)

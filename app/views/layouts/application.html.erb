@@ -12,23 +12,26 @@
   <div class="container">
     <%= render :partial => "shared/header" %>
     <% if signed_in? %>
-      <% unless current_user.company %>
-        <%= link_to 'Create Company', new_company_path, :class => 'nav-link' %>
+      <% unless current_user.admin_of %>
+        <%= link_to 'Create Company', new_company_path %>
       <% end %>
-      <%= link_to "RFIs", Employee.find_by_user_id(current_user.id) ? rfis_path : my_rfis_path, :class => 'nav-link' %>
-      <% if Employee.find_by_user_id(current_user.id) %>
-        <%= link_to "Edit Specialty List", edit_specialty_list_path(current_user.id), :class => 'nav-link' %>
+      <% if current_user.company %>
+        <%= link_to "RFIs", current_user.company.subscription.active ? rfis_path : my_rfis_path %>
+        <%= link_to "Edit Specialty List", edit_specialty_list_path(current_user.id) %>
+      <% else %>
+        <%= link_to "RFIs", my_rfis_path %>
       <% end %>
+      <%= link_to "Edit My Profile", edit_user_path(current_user.id) %>
       <% if company = Company.find_by_admin_id(current_user.id) %>
-        <%= link_to "Company Admin Page", edit_company_path(company.id), :class => 'nav-link' %>
+        <%= link_to "Company Admin Page", edit_company_path(company.id) %>
       <% end %>
     <% end %>
-    <div class='alerts'>
-      <%= flash[:error] %>
-      <%= flash[:success] %>
-      <%= flash[:alert] %>
-    </div>
+  <div>
+    <%= flash[:error] %>
+    <%= flash[:success] %>
+    <%= flash[:alert] %>
   </div>
+</div>
 <%= yield %>
 
 </body>

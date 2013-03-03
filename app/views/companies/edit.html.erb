@@ -14,9 +14,9 @@
 
   <p>
   <% @employees.each do |employee| %>
-    <%= "#{employee.user.email} - #{employee.title}" %>
-    <%= link_to 'Remove', employee_path(employee.id), :method => 'delete' %>
-    <%= link_to 'Edit', edit_employee_path(employee.id) %>
+    <%= "#{employee.email} - #{employee.title}" %>
+    <%= link_to 'Remove', company_employee_path(employee.id, :company_id => @company.id), :method => 'delete' %>
+    <%= link_to 'Edit', edit_company_employee_path(employee.id, :company_id => @company.id) %>
     <br/>
   <% end %>
   </p>
