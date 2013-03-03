@@ -6,10 +6,16 @@
       <% @sent_rfis.each do |rfi| %>
         <tr>
           <td>
-            <h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
+            <div class='twelve columns'>
+              <div class='rfi-subject'>
+                <%= link_to subject_shortner(rfi.subject), rfi_path(rfi.id) %>
+              </div>
+            </div>
           </td>
           <td>
-            <h3><%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %></h3>
+            <div class='four columns'>
+              <%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %>
+           </div>
           </td>
           <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
         </tr>
