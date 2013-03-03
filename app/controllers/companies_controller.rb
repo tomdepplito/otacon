@@ -23,7 +23,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @employees = Employee.where('company_id = @company.id')
+    @employees = @company.employees
   end
 
   def edit
@@ -43,13 +43,15 @@ class CompaniesController < ApplicationController
   end
 
   def add_employee
-    @company = Company.find(params[:id])
-    @employee = Employee.new
     if params[:email].present?
-      @future_employee = User.find_by_email(params[:email])
-      Notifier.new_employee_confirmation(@future_employee, @company).deliver unless @future_employee.nil?
-      flash[:success] = "Employee has been notified"
-      redirect_to company_path(@company)
+      if @future_employee = User.find_by_email(params[:email])
+        Notifier.new_employee_confirmation(@future_employee, @company).deliver unless @future_employee.nil?
+        flash[:success] = "Employee has been notified"
+        redirect_to company_path(@company)
+      else
+        flash[:error] = "Could not find user with that email"
+        redirect_to company_path(@company)
+      end
     else
       flash[:error] = "Need Employee Email"
       render :add_employee
