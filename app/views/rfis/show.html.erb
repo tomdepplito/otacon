@@ -8,7 +8,7 @@
 
   <%= render :partial => "display_rfi", :locals => { :rfi => @rfi } %>
 
-  <% unless @user.id == @rfi.sender_id %>
+  <% unless current_user.id == @rfi.sender_id %>
     <div class='response'>
       <%= link_to "Respond", {:controller => "rfis", :action => "new",
                               :parent_id => @rfi.parent_id ? @rfi.parent_id : @rfi.id,
@@ -16,7 +16,7 @@
     </div>
   <% end %>
 
-  <% if @user.id == @rfi.sender_id %>
+  <% if current_user.id == @rfi.sender_id %>
     <%= render :partial => "display_rfi_responses", :locals => { :parent_rfi => @rfi } %>
   <% end %>
 </div>

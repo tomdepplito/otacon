@@ -1,14 +1,23 @@
 <div class='container'>
   <%= render :partial => "rfi_header" %>
+
   <div class='rfis'>
     <table class='rfis-table'>
       <% @rfis.each do |rfi, match| %>
-        <td>
-          <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi, :match => match } %>
-        </td>
-        <td>
-          <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
-        </td>
+        <tr>
+          <td>
+            <div class='twelve columns'>
+              <div class='rfi-subject'>
+                <%= render :partial => "display_rfi_heading", :locals => { :rfi => rfi, :match => match } %>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class='four columns'>
+              <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>
+            </div>
+          </td>
+        </tr>
       <% end %>
     </table>
   </div>
