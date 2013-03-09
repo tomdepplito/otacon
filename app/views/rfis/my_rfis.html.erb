@@ -14,7 +14,7 @@
           </td>
           <td>
             <div class='four columns'>
-              <%= "Responses - #{Rfi.find_all_by_parent_id(rfi.id).count}" %>
+              <%= "Responses - #{rfi.responses.length}" %>
            </div>
           </td>
           <%= render :partial => "display_attachments", :locals => { :rfi => rfi } %>

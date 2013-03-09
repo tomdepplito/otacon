@@ -11,10 +11,11 @@ class Rfi < Conversation
 
   scope :all_parent_messages, lambda { where("parent_id IS NULL") }
 
-  scope :responses, lambda { where("parent_id = ?", self.id) }
+  scope :responses, lambda { where("parent_id = ? AND sender_id != ?", self.id, self.sender_id) }
 
   def responses
-    Rfi.find_all_by_parent_id(self.id)
+    responses = Rfi.find_all_by_parent_id(self.id)
+    responses.select { |rfi| rfi.sender_id != self.sender_id }
   end
 
   def keywords
