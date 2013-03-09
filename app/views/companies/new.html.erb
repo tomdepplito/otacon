@@ -8,26 +8,25 @@
   </script>
 <% end %>
 
-<div id="stripe_error"></div>
+<div class='container'>
+  <div id="stripe_error"></div>
 
-<h1>New Company Page</h1>
+  <h1>New Company Page</h1>
 
-<%= form_for @company, :html => { :id => "new_subscription" } do |f| %>
-  <p>
+  <%= form_for @company, :html => { :id => "new_subscription" } do |f| %>
+
     <%= f.label "Company Name:" %>
     <%= f.text_field :name  %>
-  </p>
 
-  <div>
-    <%= label_tag 'Subscription Plan:' %><br />
+    <%= label_tag 'Subscription Plan:' %>
     <%= select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => ['Plan 2 - $50.00/month', 2]) %>
-  </div>
 
-  <div id="subscription">
-    <%= render "shared/subscription" %>
-  </div>
+    <div id="subscription">
+      <%= render "shared/subscription" %>
+    </div>
 
-  <%= hidden_field nil, :stripe_card_token %>
+    <%= hidden_field nil, :stripe_card_token %>
 
-  <%= f.submit %>
-<% end %>
+    <%= f.submit %>
+  <% end %>
+</div>

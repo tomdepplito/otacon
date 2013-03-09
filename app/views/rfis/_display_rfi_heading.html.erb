@@ -1,11 +1,10 @@
-<h4><%= link_to rfi.subject, rfi_path(rfi.id) %></h4>
+<%= link_to subject_shortner(rfi.subject), rfi_path(rfi.id) %>
 
 <% if defined? match %>
-  <h3><%= "#{match}%" %></h3>
+  <%= match.nil? ? "" : "#{match}%" %>
 <% end %>
-
 <div class='response'>
-  <%= link_to "Respond", {:controller => "rfis", :action => "new",
-                          :parent_id => rfi.parent_id ? rfi.parent_id : rfi.id,
-                          :receiver_id => rfi.sender_id } %>
+    <%= link_to "Respond", {:controller => "rfis", :action => "new",
+                            :parent_id => rfi.parent_id ? rfi.parent_id : rfi.id,
+                            :receiver_id => rfi.sender_id } %>
 </div>

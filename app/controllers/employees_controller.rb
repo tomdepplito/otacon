@@ -2,6 +2,8 @@ class EmployeesController < ApplicationController
   before_filter :get_company_info, :except => [:validate_employee]
 
   def edit
+    @employee = User.find(params[:id])
+    @company = Company.find(params[:company_id])
   end
 
   def update
