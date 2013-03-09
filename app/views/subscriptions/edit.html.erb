@@ -1,37 +1,39 @@
-<%= form_for @subscription, :html => { :id => "edit_subscription" } do |f| %>
+<div class='container'>
+  <%= form_for @subscription, :html => { :id => "edit_subscription" } do |f| %>
 
-<%= link_to "Change Card", edit_card_subscription_path(@subscription.id) %>
+  <%= link_to "Change Card", edit_card_subscription_path(@subscription.id) %>
 
-<div>
-  <%= label_tag "Subscription Status: #{@customer.subscription ? 'Active' : 'Inactive'}" %>
-</div>
+  <div>
+    <%= label_tag "Subscription Status: #{@customer.subscription ? 'Active' : 'Inactive'}" %>
+  </div>
 
-<div>
-  <%= label_tag 'Subscription Plan:' %><br />
-  <%= select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan) %>
-</div>
+  <div>
+    <%= label_tag 'Subscription Plan:' %><br />
+    <%= select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan) %>
+  </div>
 
-  <% if @customer.subscription %>
-    <div>
-      <%= label_tag "Cancel Subscription:" %>
+    <% if @customer.subscription %>
+      <div>
+        <%= label_tag "Cancel Subscription:" %>
 
-      <%= radio_button_tag :cancel_subscription, true %>
-      <%= label_tag "Yes" %>
+        <%= radio_button_tag :cancel_subscription, true %>
+        <%= label_tag "Yes" %>
 
-      <%= radio_button_tag :cancel_subscription, false, :checked => true %>
-      <%= label_tag "No" %>
-    </div>
-  <% else %>
-    <div>
-      <%= label_tag "Reactivate Subscription:" %>
+        <%= radio_button_tag :cancel_subscription, false, :checked => true %>
+        <%= label_tag "No" %>
+      </div>
+    <% else %>
+      <div>
+        <%= label_tag "Reactivate Subscription:" %>
 
-      <%= radio_button_tag :reactivate_subscription, true %>
-      <%= label_tag "Yes" %>
+        <%= radio_button_tag :reactivate_subscription, true %>
+        <%= label_tag "Yes" %>
 
-      <%= radio_button_tag :reactivate_subscription, false %>
-      <%= label_tag "No" %>
-    </div>
+        <%= radio_button_tag :reactivate_subscription, false %>
+        <%= label_tag "No" %>
+      </div>
+    <% end %>
+
+    <div><%= f.submit "Update" %></div>
   <% end %>
-
-  <div><%= f.submit "Update" %></div>
-<% end %>
+</div>

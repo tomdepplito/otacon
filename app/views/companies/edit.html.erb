@@ -1,24 +1,25 @@
-<h1><%= "Edit #{@company.name}" %></h1>
+<div class='container'>
+  <h1><%= "Edit #{@company.name}" %></h1>
 
-<%= link_to "Edit Subscription", edit_subscription_path(@subscription.id) %>
+  <%= link_to "Edit Subscription", edit_subscription_path(@subscription.id) %>
 
-<p>
-<%= form_for @company do |f| %>
-  <%= f.label "Company Name:" %>
-  <%= f.text_field :name %>
-  <br/>
-    <%= f.submit %>
-<% end %>
-</p>
+  <p>
+  <%= form_for @company do |f| %>
+    <%= f.label "Company Name:" %>
+    <%= f.text_field :name %>
+    <br/>
+      <%= f.submit %>
+  <% end %>
+  </p>
 
-<p>
-<% @employees.each do |employee| %>
-  <%= "#{employee.email} - #{employee.title}" %>
-  <%= link_to 'Remove', company_employee_path(employee.id, :company_id => @company.id), :method => 'delete' %>
-  <%= link_to 'Edit', edit_company_employee_path(employee.id, :company_id => @company.id) %>
-  <br/>
-<% end %>
-</p>
+  <p>
+  <% @employees.each do |employee| %>
+    <%= "#{employee.email} - #{employee.title}" %>
+    <%= link_to 'Remove', company_employee_path(employee.id, :company_id => @company.id), :method => 'delete' %>
+    <%= link_to 'Edit', edit_company_employee_path(employee.id, :company_id => @company.id) %>
+    <br/>
+  <% end %>
+  </p>
 
-<%= link_to 'Add Employee to Company', add_employee_company_path(@company.id) %>
-
+  <%= link_to 'Add Employee to Company', add_employee_company_path(@company.id) %>
+</div>
