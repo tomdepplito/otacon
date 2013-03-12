@@ -23,6 +23,7 @@ group :assets do
 end
 
 group :test, :development do
+  gem 'shoulda'
   gem 'pg'
   gem 'redis', '3.0.2'
   gem "rspec-rails", "~> 2.0"

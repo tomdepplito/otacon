@@ -27,6 +27,12 @@ FactoryGirl.define do
     body { FactoryGirl.generate(:string) }
   end
 
+  factory :rfi do
+    sender_id { FactoryGirl.generate(:id) }
+    body { FactoryGirl.generate(:string) }
+    subject { FactoryGirl.generate(:string) }
+  end
+
   factory :office do
     street_address "11768"
     phone_num { FactoryGirl.generate(:string) }
@@ -34,7 +40,7 @@ FactoryGirl.define do
   end
 
   factory :specialty_list do
-    employee
+    owner_id { FactoryGirl.generate(:id) }
     electronics []
   end
 

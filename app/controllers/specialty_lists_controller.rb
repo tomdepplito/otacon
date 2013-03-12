@@ -6,8 +6,8 @@ class SpecialtyListsController < ApplicationController
 
   def update
     @new_word = params[:electronics]
-    @specialty_list.electronics << to_regex(params[:electronics]) unless params[:electronics].blank?
-    @specialty_list.mechanical << to_regex(params[:mechanical]) unless params[:mechanical].blank?
+    @specialty_list.add_keyword(params[:electronics], 'electronics') unless params[:electronics].blank?
+    @specialty_list.add_keyword(params[:mechanical], 'mechanical') unless params[:mechanical].blank?
     @specialty_list.save
     respond_to do |format|
       format.js
@@ -26,9 +26,5 @@ class SpecialtyListsController < ApplicationController
 
   def get_specialty_list
     @specialty_list = SpecialtyList.find_by_owner_id(current_user.id)
-  end
-
-  def to_regex(string)
-    Regexp.new(string.singularize+"s{0,1}")
   end
 end
