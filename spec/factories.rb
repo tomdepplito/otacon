@@ -40,7 +40,7 @@ FactoryGirl.define do
   end
 
   factory :specialty_list do
-    employee
+    owner_id { FactoryGirl.generate(:id) }
     electronics []
   end
 
