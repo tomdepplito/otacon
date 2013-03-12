@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Company do
+
+  it { should validate_presence_of(:admin_id) }
+  it { should validate_presence_of(:name) }
+  it { should have_many(:offices) }
+  it { should have_many(:employees) }
+
   subject do
     FactoryGirl.create(:company, :admin_id => FactoryGirl.create(:user).id)
   end
