@@ -15,6 +15,33 @@
 .container .twelve.columns .rfi-subject {
   font-size:14px;
 }
+
+header {
+  position:fixed;
+  height:50px;
+  width:100%;
+  box-shadow: 0px 0px 2px 2px;
+  z-index:1;
+}
+
+.top-links {
+  vertical-align:middle;
+  display:inline-block;
+  line-height:50px;
+  font-size: 16px;
+  font-weight:500;
+  z-index:10;
+}
+
+ul li {
+  display:inline;
+  margin:7px;
+}
+
+.content {
+  padding-top:60px;
+  z-index:1;
+}
 /*
  .button {
    font-size: 15px;
@@ -136,4 +163,7 @@
 */
 .login {
   float: right;
+  display:inline-block;
+  line-height:50px;
+  font-size: 16px;
 }
