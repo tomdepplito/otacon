@@ -22,7 +22,7 @@
             <% end %>
             <% if current_user.company %>
               <li>
-                <%= link_to "RFIs", current_user.company.subscription.active ? rfis_path : my_rfis_path %>
+                <%= link_to "Source Parts", current_user.company.subscription.active ? rfis_path : my_rfis_path %>
               </li>
               <li>
                 <%= link_to "Edit Specialty List", edit_specialty_list_path(current_user.id) %>
@@ -32,9 +32,6 @@
                 <%= link_to "RFIs", my_rfis_path %>
               </li>
             <% end %>
-            <li>
-              <%= link_to "Edit My Profile", edit_user_path(current_user.id) %>
-            </li>
             <% if company = Company.find_by_admin_id(current_user.id) %>
               <li>
                 <%= link_to "Company Admin Page", edit_company_path(company.id) %>
