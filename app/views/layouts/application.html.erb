@@ -13,7 +13,7 @@
     <div class="container">
       <%= render :partial => "shared/header" %>
       <span class='top-links'>
-        <ul>
+        <ul class='nav'>
           <% if signed_in? %>
             <% unless current_user.admin_of %>
               <li>
@@ -54,5 +54,10 @@
   <%= yield %>
 </div>
 
+<footer>
+<hr>
+<%= render :partial => "shared/footer" %>
+</hr>
+<footer>
 </body>
 </html>

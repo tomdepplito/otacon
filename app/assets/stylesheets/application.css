@@ -24,6 +24,13 @@ header {
   z-index:1;
 }
 
+footer {
+  Position: absolute;
+  Width: 100%;
+  Bottom: 0;
+  Height: 75px;
+}
+
 .top-links {
   vertical-align:middle;
   display:inline-block;
@@ -33,9 +40,18 @@ header {
   z-index:10;
 }
 
-ul li {
+ul {
+}
+
+ul.nav li {
   display:inline;
   margin:7px;
+}
+
+ul.footer li {
+  display:inline;
+  margin:7px;
+  line-height:10px;
 }
 
 .content {

@@ -1,5 +1,5 @@
 <div class='login'>
-  <ul>
+  <ul class='nav'>
     <% if signed_in? %>
       <li>
         <%= link_to "Edit My Profile", edit_user_path(current_user.id), :class => 'nav-link' %>
