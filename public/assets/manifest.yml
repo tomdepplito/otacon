@@ -1,7 +1,9 @@
 ---
+paperclip-mini.png: paperclip-mini-28ae7a59aa24390a995df7f7978981a1.png
+paperclip-mini/index.png: paperclip-mini-28ae7a59aa24390a995df7f7978981a1.png
 rails.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 rails/index.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 application.js: application-b4a717f3e6850bc3f42dd3589b6e8e1f.js
 application/index.js: application-b4a717f3e6850bc3f42dd3589b6e8e1f.js
-application.css: application-9b88d8f35d125d43c7ff1aa173ea5d61.css
-application/index.css: application-9b88d8f35d125d43c7ff1aa173ea5d61.css
+application.css: application-aa4e4987f9b10bd372e9d59b1d6c0582.css
+application/index.css: application-aa4e4987f9b10bd372e9d59b1d6c0582.css
